@@ -65,6 +65,32 @@ public class Neuron(double[] weights, double bias, Activation activation)
         return sum;
     }
 
+    public static double[] Softmax(double[] scores, double temperature = 1)
+    {
+        double max = scores.Max();  // same chances, and Exp can't overflow
+        var chances = new double[scores.Length];
+        double total = 0;
+        for (int i = 0; i < scores.Length; i++)
+        {
+            chances[i] = Math.Exp((scores[i] - max) / temperature);
+            total += chances[i];
+        }
+        for (int i = 0; i < chances.Length; i++)
+        {
+            chances[i] /= total;
+        }
+        return chances;
+    }
+
+    public string Save() => string.Join(' ', Weights.Append(Bias));
+
+    public void Load(string line)
+    {
+        double[] numbers = line.Split(' ').Select(double.Parse).ToArray();
+        numbers[..^1].CopyTo(Weights, 0);
+        Bias = numbers[^1];
+    }
+
     public override string ToString()
     {
         var weights = string.Join(", ", Weights.Select(w => w.ToString("0.00")));

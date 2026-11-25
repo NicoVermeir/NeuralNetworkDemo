@@ -10,6 +10,9 @@ public class Activation(string name, Func<double, double> apply, Func<double, do
 
     public static Activation Sigmoid = new ("Sigmoid", Sig, total => Sig(total) * (1 - Sig(total)));
 
+    public static Activation Identity = new ("Identity", total => total, total => 1);
+
+
     static double Sig(double total) => 1 / (1 + Math.Exp(-total));
 
     public string Name { get; } = name;
