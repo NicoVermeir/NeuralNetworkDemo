@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="names.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
