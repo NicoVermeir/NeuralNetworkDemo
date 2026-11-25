@@ -53,7 +53,7 @@ public class Neuron(double[] weights, double bias, Activation activation)
         return inputBlame;
     }
 
-    public double Dot(double[] a, double[] b)
+    public static double Dot(double[] a, double[] b)
     {
         double sum = 0;
 
