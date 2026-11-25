@@ -19,4 +19,12 @@ public class Network(params Layer[] layers)
 
         return values;
     }
+
+    public void Backward(double[] blame, double learningRate)
+    {
+        for (int i = Layers.Length - 1; i >= 0; i--)
+        {
+            blame = Layers[i].Backward(blame, learningRate);
+        }
+    }
 }

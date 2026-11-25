@@ -30,4 +30,18 @@ public class Layer(params Neuron[] neurons)
 
         return outputs;
     }
+
+    public double[] Backward(double[] blame, double learningRate)
+    {
+        var inputBlame = new double[Neurons[0].Weights.Length];
+        for (int n = 0; n < Neurons.Length; n++)
+        {
+            double[] fromNeuron = Neurons[n].Backward(blame[n], learningRate);
+            for (int i = 0; i < inputBlame.Length; i++)
+            {
+                inputBlame[i] += fromNeuron[i];
+            }
+        }
+        return inputBlame;
+    }
 }
