@@ -10,6 +10,21 @@ public class Neuron(double[] weights, double bias, Activation activation)
     public double Bias { get; } = bias;
     public Activation Activation { get; } = activation;
 
+    // Chapter 2: every network starts as random numbers
+    public static Neuron CreateRandom(int inputCount, Random random, Activation activation)
+    {
+        double limit = 1 / Math.Sqrt(inputCount);
+        double Next() => (random.NextDouble() * 2 - 1) * limit;  // -limit..+limit
+
+        var weights = new double[inputCount];
+        for (int i = 0; i < inputCount; i++)
+        {
+            weights[i] = Next();
+        }
+
+        return new Neuron(weights, Next(), activation);
+    }
+
     public double Forward(params double[] inputs)
     {
         if (inputs.Length != weights.Length)
